@@ -11,12 +11,12 @@
     "build":"cd client && npm run build",
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
-    "install-client": "cd client && npm install",
+     "install-client": "cd client && npm install",
     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build",
     "frontend": "npm run start --prefix client",
     "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
-  "author": "John ahn",
+  "author": "dival sehgal",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
