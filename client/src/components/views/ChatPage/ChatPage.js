@@ -12,7 +12,7 @@ class ChatPage extends Component {
     chatMessage: "",
   };
   componentDidMount() {
-    let server = "http://localhost:5000";
+    let server = "http://7142e9316180.ngrok.io";
     this.props.dispatch(getChats());
     this.socket = io(server);
 
