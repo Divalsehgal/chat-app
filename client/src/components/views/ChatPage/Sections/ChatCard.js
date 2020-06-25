@@ -20,13 +20,13 @@ function ChatCard(props) {
                         props.message.substring(props.message.length - 3, props.message.length) === 'mp4' ?
                             <video
                                 style={{ maxWidth: '200px' }}
-                                src={`http://7142e9316180.ngrok.io/${props.message}`} alt="video"
+                                src={`https://7142e9316180.ngrok.io/${props.message}`} alt="video"
                                 type="video/mp4" controls
                             />
                             :
                             <img
                                 style={{ maxWidth: '200px' }}
-                                src={`http://7142e9316180.ngrok.io/${props.message}`}
+                                src={`https://7142e9316180.ngrok.io/${props.message}`}
                                 alt="img"
                             />
                         :
