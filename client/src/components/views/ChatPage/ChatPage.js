@@ -12,7 +12,7 @@ class ChatPage extends Component {
     chatMessage: "",
   };
   componentDidMount() {
-    let server = "http://782c015d4afb.ngrok.io ";
+    let server = "http://localhost:5000";
     this.props.dispatch(getChats());
     this.socket = io(server);
 
@@ -29,44 +29,14 @@ class ChatPage extends Component {
     });
   };
   onDrop = (files) => {
-    console.log(files)
-
-
-    if (this.props.user.userData && !this.props.user.userData.isAuth) {
-        return alert('Please Log in first');
-    }
-
-
-
-    let formData = new FormData;
-
+    console.log(files);
+    let formData = new FormData();
     const config = {
-        header: { 'content-type': 'multipart/form-data' }
-    }
-
-    formData.append("file", files[0])
-
-    Axios.post('api/chat/uploadfiles', formData, config)
-        .then(response => {
-            if (response.data.success) {
-                let chatMessage = response.data.url;
-                let userId = this.props.user.userData._id
-                let userName = this.props.user.userData.name;
-                let userImage = this.props.user.userData.image;
-                let nowTime = moment();
-                let type = "VideoOrImage"
-
-                this.socket.emit("Input Chat Message", {
-                    chatMessage,
-                    userId,
-                    userName,
-                    userImage,
-                    nowTime,
-                    type
-                });
-            }
-        })
-}
+      header: { "content-type": "multipart/form-data" },
+    };
+    formData.append("files", files[0]);
+    Axios.post("/api/chat/uploadfiles", formData, config)
+  };
   renderCards = () =>
     this.props.chat.chats &&
     this.props.chat.chats.map((chat) => <ChatCard key={chat._id} {...chat} />);
