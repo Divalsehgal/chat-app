@@ -12,7 +12,9 @@ class ChatPage extends Component {
     chatMessage: "",
   };
   componentDidMount() {
-    let server = `http://localhost:${process.env.PORT || 5000}`;
+    let server = `http://${
+      "localhost:5000" || " ancient-cliffs-69442.herokuapp.com"
+    }`;
     this.props.dispatch(getChats());
     this.socket = io(server);
 
@@ -36,7 +38,7 @@ class ChatPage extends Component {
     };
     formData.append("files", files[0]);
 
-    Axios.post("api/chat/uploadfiles", formData, config).then((response) => {
+    Axios.post("/api/chat/uploadfiles", formData, config).then((response) => {
       if (response.data.success) {
         let chatMessage = response.data.url;
         let userId = this.props.user.userData._id;
@@ -58,11 +60,8 @@ class ChatPage extends Component {
   };
 
   renderCards = () =>
-  this.props.chat.chats
-  && this.props.chat.chats.map((chat) => (
-      <ChatCard key={chat._id}  {...chat} />
-  ));
-
+    this.props.chat.chats &&
+    this.props.chat.chats.map((chat) => <ChatCard key={chat._id} {...chat} />);
 
   submitChatMessage = (e) => {
     e.preventDefault();

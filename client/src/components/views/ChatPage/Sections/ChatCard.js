@@ -4,7 +4,7 @@ import { Comment, Tooltip, Avatar } from "antd";
 import {Link, RichText, Date} from 'prismic-reactjs';
 function ChatCard(props) {
 //   console.log("props=>>>", props.createdAt);
-//   console.log("props=>>>", props);
+   console.log("props=>>>", props);
 
 
 
@@ -23,7 +23,7 @@ function ChatCard(props) {
             ) === "mp4" ? (
               <video
                 style={{ maxWidth: "200px" }}
-                src={`http://localhost:${process.env.PORT || 5000}/${
+                src={`/api/${
                   props.message
                 }`}
                 alt="video"
@@ -33,7 +33,7 @@ function ChatCard(props) {
             ) : (
               <img
                 style={{ maxWidth: "200px" }}
-                src={`http://localhost:${process.env.PORT || 5000}/${
+                src={`/api/${
                   props.message
                 }`}
                 alt="img"
