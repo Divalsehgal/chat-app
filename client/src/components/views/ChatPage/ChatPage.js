@@ -12,7 +12,7 @@ class ChatPage extends Component {
     chatMessage: "",
   };
   componentDidMount() {
-    let server = "https://7142e9316180.ngrok.io";
+    let server = `http://localhost:${process.env.PORT || 5000}`;
     this.props.dispatch(getChats());
     this.socket = io(server);
 
@@ -21,7 +21,7 @@ class ChatPage extends Component {
     });
   }
   componentDidUpdate() {
-    this.messageEnd.scrollIntoView({behavior:"smooth"});
+    this.messageEnd.scrollIntoView({ behavior: "smooth" });
   }
   handleSearchchange = (e) => {
     this.setState({
@@ -35,11 +35,35 @@ class ChatPage extends Component {
       header: { "content-type": "multipart/form-data" },
     };
     formData.append("files", files[0]);
-    Axios.post("/api/chat/uploadfiles", formData, config)
+
+    Axios.post("api/chat/uploadfiles", formData, config).then((response) => {
+      if (response.data.success) {
+        let chatMessage = response.data.url;
+        let userId = this.props.user.userData._id;
+        let userName = this.props.user.userData.name;
+        let userImage = this.props.user.userData.image;
+        let nowTime = moment();
+        let type = "VideoOrImage";
+
+        this.socket.emit("Input Chat Message", {
+          chatMessage,
+          userId,
+          userName,
+          userImage,
+          nowTime,
+          type,
+        });
+      }
+    });
   };
+
   renderCards = () =>
-    this.props.chat.chats &&
-    this.props.chat.chats.map((chat) => <ChatCard key={chat._id} {...chat} />);
+  this.props.chat.chats
+  && this.props.chat.chats.map((chat) => (
+      <ChatCard key={chat._id}  {...chat} />
+  ));
+
+
   submitChatMessage = (e) => {
     e.preventDefault();
     let chatMessage = this.state.chatMessage;

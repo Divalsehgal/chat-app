@@ -48,7 +48,7 @@ var storage = multer.diskStorage({
   // }
 });
 
-var upload = multer({ storage: storage }).single("file");
+var upload = multer({ storage: storage }).single("files");
 
 app.post("/api/chat/uploadfiles", auth, (req, res) => {
   upload(req, res, (err) => {
