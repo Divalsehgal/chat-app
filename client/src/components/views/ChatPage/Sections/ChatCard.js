@@ -1,12 +1,10 @@
 import React from "react";
 import moment from "moment";
 import { Comment, Tooltip, Avatar } from "antd";
-import {Link, RichText, Date} from 'prismic-reactjs';
+import { Link, RichText, Date } from "prismic-reactjs";
 function ChatCard(props) {
-//   console.log("props=>>>", props.createdAt);
-   console.log("props=>>>", props);
-
-
+  //   console.log("props=>>>", props.createdAt);
+  console.log("props=>>>", props);
 
   return (
     <div style={{ width: "100%" }}>
@@ -23,9 +21,7 @@ function ChatCard(props) {
             ) === "mp4" ? (
               <video
                 style={{ maxWidth: "200px" }}
-                src={`/api/${
-                  props.message
-                }`}
+                src={`http://localhost:5000/${props.message}`}
                 alt="video"
                 type="video/mp4"
                 controls
@@ -33,9 +29,7 @@ function ChatCard(props) {
             ) : (
               <img
                 style={{ maxWidth: "200px" }}
-                src={`/api/${
-                  props.message
-                }`}
+                src={`http://localhost:5000/${props.message}`}
                 alt="img"
               />
             )
