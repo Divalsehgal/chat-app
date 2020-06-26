@@ -12,7 +12,7 @@ class ChatPage extends Component {
     chatMessage: "",
   };
   componentDidMount() {
-    let server = `http://ancient-cliffs-69442.herokuapp.com`
+    let server = `https://ancient-cliffs-69442.herokuapp.com`
     this.props.dispatch(getChats());
     this.socket = io(server);
 
